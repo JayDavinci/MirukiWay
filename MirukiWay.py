@@ -40,7 +40,7 @@ if "selected_product" in st.session_state:
         with col1:
             quantity = st.number_input("Jumlah", min_value=1, value=1)
         with col2:
-            price = st.number_input("Harga per unit", min_value=0.0, value=0.0, step=1000.0)
+            price = st.number_input("Harga per unit", min_value=0, value=0, step=1000)
         with col3:
             record_date = st.date_input("Tanggal", value=date.today())
         if st.form_submit_button("Tambahkan Pengeluaran"):
