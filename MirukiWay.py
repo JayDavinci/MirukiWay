@@ -48,7 +48,7 @@ if "selected_product" in st.session_state:
         with col1:
             quantity = st.number_input("Jumlah", min_value=1, value=1)
         with col2:
-            price = st.number_input("Harga per unit", min_value=0.0, value=0.0, step=1000.0)
+            price = st.number_input("Harga per unit", min_value=0, value=0, step=1000.0)
         with col3:
             record_date = st.date_input("Tanggal", value=date.today())
 
@@ -75,21 +75,21 @@ if "selected_product" in st.session_state:
 
         st.table(df)
         st.subheader("Unduh Data")
-        @st.cache_data
-        def convert_df_to_excel(dataframe):
-            from io import BytesIO
-            output = BytesIO()
-            with pd.ExcelWriter(output, engine='openpyxl') as writer:
-                dataframe.to_excel(writer, index=False, sheet_name=product_name)
-            processed_data = output.getvalue()
-            return processed_data
+        # @st.cache_data
+        # def convert_df_to_excel(dataframe):
+        #     from io import BytesIO
+        #     output = BytesIO()
+        #     with pd.ExcelWriter(output, engine='openpyxl') as writer:
+        #         dataframe.to_excel(writer, index=False, sheet_name=product_name)
+        #     processed_data = output.getvalue()
+        #     return processed_data
 
-        excel_data = convert_df_to_excel(df)
-        st.download_button(
-            label="Unduh sebagai Excel",
-            data=excel_data,
-            file_name=f"{product_name}_pengeluaran.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        )
-    else:
-        st.write("Belum ada pengeluaran untuk produk ini.")
+    #     excel_data = convert_df_to_excel(df)
+    #     st.download_button(
+    #         label="Unduh sebagai Excel",
+    #         data=excel_data,
+    #         file_name=f"{product_name}_pengeluaran.xlsx",
+    #         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    #     )
+    # else:
+    #     st.write("Belum ada pengeluaran untuk produk ini.")
