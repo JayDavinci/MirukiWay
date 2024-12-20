@@ -12,7 +12,7 @@ def add_product(product_type, product_name):
         st.session_state.products[product_type][product_name] = []
 
 st.title("SCM-MIRUKI WAY")
-st.image("Mirukiwaylogo.png", use_column_width=True)
+st.image("Mirukiwaylogo.png", use_container_width=True)
 
 st.sidebar.header("Tambahkan Produk")
 product_type = st.sidebar.text_input("Jenis Produk")
