@@ -74,5 +74,22 @@ if "selected_product" in st.session_state:
             df = df[df['date'].dt.strftime('%B %Y') == month_selected]
 
         st.table(df)
+        st.subheader("Unduh Data")
+        @st.cache_data
+        def convert_df_to_excel(dataframe):
+            from io import BytesIO
+            output = BytesIO()
+            with pd.ExcelWriter(output, engine='openpyxl') as writer:
+                dataframe.to_excel(writer, index=False, sheet_name=product_name)
+            processed_data = output.getvalue()
+            return processed_data
+
+        excel_data = convert_df_to_excel(df)
+        st.download_button(
+            label="Unduh sebagai Excel",
+            data=excel_data,
+            file_name=f"{product_name}_pengeluaran.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
     else:
         st.write("Belum ada pengeluaran untuk produk ini.")
